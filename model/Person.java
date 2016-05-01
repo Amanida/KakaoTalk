@@ -2,6 +2,8 @@ package kr.co.stone_i.jin.kakaotalk.model;
 
 import android.support.annotation.DrawableRes;
 
+import java.io.Serializable;
+
 import kr.co.stone_i.jin.kakaotalk.R;
 
 /**
@@ -11,13 +13,17 @@ public class Person {
     private int id;
     private String name;
     private String text;
+    private String phone;
     private @DrawableRes int image;
+    private @DrawableRes int background;
 
-    public Person(int id, String name, String text){
+    public Person(int id, String name, String text, String phone){
         this.id = id;
         this.name = name;
         this.text = text;
+        this.phone = phone;
         this.image = R.drawable.person_image_empty;
+        this.background = R.drawable.person_image_empty;
     }
 
     public int getId() {
@@ -50,5 +56,21 @@ public class Person {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getBackground() {
+        return background;
+    }
+
+    public void setBackground(int background) {
+        this.background = background;
     }
 }

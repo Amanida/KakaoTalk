@@ -1,9 +1,11 @@
 package kr.co.stone_i.jin.kakaotalk.model;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,15 @@ import kr.co.stone_i.jin.kakaotalk.ui.FriendsViewHolder;
  */
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
     List<Person> friends = new ArrayList<Person>();
+    OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        public void OnItemClicked(RecyclerView.ViewHolder holder, View view, Person p, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public void add(Person p) {
         friends.add(p);
@@ -46,6 +57,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsViewHolder> {
     @Override
     public void onBindViewHolder(FriendsViewHolder holder, int position) {
         holder.setPerson(getItem(position));
+        holder.setOnItemClickListener(mListener);
     }
 
     private Person getItem(int position) {

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import kr.co.stone_i.jin.kakaotalk.R;
+import kr.co.stone_i.jin.kakaotalk.model.FriendsAdapter;
 import kr.co.stone_i.jin.kakaotalk.model.Person;
 import kr.co.stone_i.jin.kakaotalk.ui.widget.BezelImageView;
 
@@ -15,6 +16,7 @@ public class FriendsViewHolder extends RecyclerView.ViewHolder {
     private TextView nameView;
     private TextView textView;
     private BezelImageView imageView;
+    FriendsAdapter.OnItemClickListener mItemClickListener;
 
 
     public FriendsViewHolder(View itemView) {
@@ -22,6 +24,20 @@ public class FriendsViewHolder extends RecyclerView.ViewHolder {
         nameView = (TextView)itemView.findViewById(R.id.profile_name);
         textView = (TextView)itemView.findViewById(R.id.profile_text);
         imageView = (BezelImageView)itemView.findViewById(R.id.profile_image);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                if (mItemClickListener != null) {
+                    mItemClickListener.OnItemClicked(FriendsViewHolder.this, v, person, position);
+                }
+            }
+        });
+    }
+
+    public void setOnItemClickListener(FriendsAdapter.OnItemClickListener listener) {
+        mItemClickListener = listener;
     }
 
     Person person;
